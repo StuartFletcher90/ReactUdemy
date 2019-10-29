@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Person/Person.css";
-import "./App.css";
+import classes from "./App.css";
 import Person from './Person/Person';
 
 //CLASS APP COMPONENT
@@ -46,7 +46,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: '#10ac84',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -65,15 +66,32 @@ class App extends Component {
             changed={(event) => this.nameChangedHandler(event, person.id)} />
         })}
       </div>
+
         
       );
-
+    
+      style.backgroundColor = '#e55039';
+      // style[':hover'] = { 
+      //   backgroundColor: '#eb2f06',
+      //   color: 'black'
+      // }
     }
 
+
+    let assignedClasses = [];
+    if (this.state.persons.length <=2) {
+      assignedClasses.push(classes.red); // classes = ['red']
+    }
+    if (this.state.persons.length <=1) {
+      assignedClasses.push(classes.bold); //classes are red and now also bold
+    }
+
+
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App!</h1>
-        <button style={style} onClick={this.togglePersonsHandler}>Switch Name</button>
+        <p className={assignedClasses.join(' ')}>Created by Stu</p>
+        <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
       {persons}
       </div>
     )
@@ -81,5 +99,3 @@ class App extends Component {
 };
 // replaced every this.State with personsState as we're using hooks with functional components
 export default App;
-
-//  onClick={() => this.switchNameHandler('Stuart')} old code for onClick button
